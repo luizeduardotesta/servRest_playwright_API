@@ -1,7 +1,7 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztesta@email.com",
+        "email": "luiztest@email.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -10,13 +10,13 @@
     },
     "duplicate": {
         "nome": "Luiz Eduardo Testa",
-        "email": "luiztesta@email.com",
+        "email": "luiztest@email.com",
         "password": "1234@Test",
         "administrador": "true"
     },
     "nomeRequired": {
         "nome": "",
-        "email": "luiztesta@email.com",
+        "email": "luiztest@email.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -28,7 +28,7 @@
     },
     "passwordRequired": {
         "nome": "Luiz Testa",
-        "email": "luiztesta@email.com",
+        "email": "luiztest@email.com",
         "password": "",
         "administrador": "true"
     },
