@@ -33,7 +33,9 @@
         "administrador": "true"
     },
     "update": {
-        "name": "Pagar a fatura do cartão de crédito",
-        "is_done": false
+        "nome": "Luiz E T Santos",
+        "email": "luiztesta@email.com",
+        "password": "1234@Teste",
+        "administrador": "true"
     }
 }

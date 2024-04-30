@@ -7,7 +7,7 @@ const BASE_URL = process.env.BASE_URL
 
 export async function createUser(request: APIRequestContext, user: UserModel) {
     const response = await request.post(`${BASE_URL}/usuarios`, {
-        data: user,
+        data: user
     })
     return response;
 }
@@ -19,5 +19,12 @@ export async function deleteUser(request: APIRequestContext, userId: string) {
 
 export async function listUserByID(request: APIRequestContext, userId: string){
     const response = await request.get(`${BASE_URL}/usuarios/${userId}`)
+    return response;
+}
+
+export async function updateUser(request: APIRequestContext, user: UserModel, userId: string){
+    const response = await request.put(`${BASE_URL}/usuarios/${userId}`, {
+        data: user
+    })
     return response;
 }
