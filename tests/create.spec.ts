@@ -89,9 +89,9 @@ test.describe('Criar', () => {
 });
 
 test.describe('Atualizar', () => {
-    test.only('Editar um usuário com sussesso', async ({ request }) => {
+    test('Editar um usuário com sussesso', async ({ request }) => {
         const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
-        const user: UserModel = userData.success;
+        const user: UserModel = userData.preUpdate;
         const updatedUser: UserModel = userData.update;
 
         const postResponse = await createUser(request, user);
@@ -102,7 +102,7 @@ test.describe('Atualizar', () => {
         const getResponse = await listUserByID(request, userId);
         expect(getResponse.status()).toEqual(200);
         const getResponseBody = await getResponse.json();
-        const expectedUserData = { ...userData.success, _id: userId };
+        const expectedUserData = { ...userData.preUpdate, _id: userId };
         expect(getResponseBody).toEqual(expectedUserData)
 
         const putResponse = await updateUser(request, updatedUser, userId);
