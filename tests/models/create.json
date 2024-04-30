@@ -35,9 +35,5 @@
     "update": {
         "name": "Pagar a fatura do cartão de crédito",
         "is_done": false
-    },
-    "delete": {
-        "name": "Estudar Ruby",
-        "is_done": false
     }
 }

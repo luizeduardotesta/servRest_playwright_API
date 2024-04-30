@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { createUser, deleteUser } from './support/api';
+import { createUser, deleteUser, listUserByID } from './support/api';
 import { readFileSync } from 'fs';
 import { UserModel } from './models/commonModels';
 
@@ -18,6 +18,12 @@ test.describe('Criar', () => {
         expect(postResponseBody.message).toEqual('Cadastro realizado com sucesso');
         expect(postResponseBody._id).toBeTruthy;
         userId = postResponseBody._id;
+
+        const getResponse = await listUserByID(request, userId);
+        expect(getResponse.status()).toEqual(200);
+        const getResponseBody = await getResponse.json();
+        const expectedUserData = { ...userData.success, _id: userId };
+        expect(getResponseBody).toEqual(expectedUserData)
 
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
@@ -69,7 +75,7 @@ test.describe('Criar', () => {
         expect(postResponseBody.email).toEqual('email não pode ficar em branco');
     })
 
-    test.only('Criar um usuário com a senha em branco', async ({request}) => {
+    test('Criar um usuário com a senha em branco', async ({request}) => {
         const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
         const user: UserModel = userData.passwordRequired;
 

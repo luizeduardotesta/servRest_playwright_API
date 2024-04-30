@@ -16,3 +16,8 @@ export async function deleteUser(request: APIRequestContext, userId: string) {
     const response = await request.delete(`${BASE_URL}/usuarios/${userId}`)
     return response;
 }
+
+export async function listUserByID(request: APIRequestContext, userId: string){
+    const response = await request.get(`${BASE_URL}/usuarios/${userId}`)
+    return response;
+}
