@@ -10,3 +10,8 @@ export interface UserModel {
     headers: HeadersModel;
 }
 
+export interface LoginModel {
+    email: string,
+    password: string
+    headers: HeadersModel;
+}

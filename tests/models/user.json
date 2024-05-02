@@ -1,7 +1,7 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztest@mail.com",
+        "email": "luiztesta@mail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -16,7 +16,7 @@
     },
     "nomeRequired": {
         "nome": "",
-        "email": "luiztest@mail.com",
+        "email": "luiztesta@mail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -28,10 +28,10 @@
     },
     "passwordRequired": {
         "nome": "Luiz Testa",
-        "email": "luiztest@mail.com",
+        "email": "luiztesta@mail.com",
         "password": "",
         "administrador": "true"
-    },    
+    },
     "preUpdate": {
         "nome": "Luiz Santos",
         "email": "luizsantos@mail.com",

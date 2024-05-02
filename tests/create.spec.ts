@@ -7,7 +7,7 @@ export let userId: string;
 
 test.describe('Criar', () => {
     test('Criar um usuário com sussesso', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.success;
 
         const postResponse = await createUser(request, user);
@@ -29,10 +29,15 @@ test.describe('Criar', () => {
         expect(deleteResponse.status()).toEqual(200);
         const deleteResponseBody = await deleteResponse.json();
         expect(deleteResponseBody.message).toEqual('Registro excluído com sucesso');
+
+        const notFoundResponse = await deleteUser(request, userId);
+        expect(notFoundResponse.status()).toEqual(200);
+        const notFoundResponseBody = await notFoundResponse.json();
+        expect(notFoundResponseBody.message).toEqual('Nenhum registro excluído');
     });
 
     test('Criar um usuário com email repetido', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.duplicate;
 
         const postResponse = await createUser(request, user);
@@ -52,7 +57,7 @@ test.describe('Criar', () => {
     });
 
     test('Criar um usuário com o nome em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.nomeRequired;
 
         const postResponse = await createUser(request, user);
@@ -64,7 +69,7 @@ test.describe('Criar', () => {
     })
 
     test('Criar um usuário com o email em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.emailRequired;
 
         const postResponse = await createUser(request, user);
@@ -76,7 +81,7 @@ test.describe('Criar', () => {
     })
 
     test('Criar um usuário com a senha em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.passwordRequired;
 
         const postResponse = await createUser(request, user);
@@ -90,7 +95,7 @@ test.describe('Criar', () => {
 
 test.describe('Atualizar', () => {
     test('Editar um usuário com sussesso', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/create.json', 'utf-8'));
+        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
         const user: UserModel = userData.preUpdate;
         const updatedUser: UserModel = userData.update;
 

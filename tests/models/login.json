@@ -1,0 +1,25 @@
+{
+    "success": {
+        "email": "luiztesta@mail.com",
+        "password": "1234@Test"
+    },
+    "headers": {
+        "Accept": "application/json"
+    },
+    "emailRequired": {
+        "email": "",
+        "password": "1234@Test"
+    },
+    "passwordRequired": {
+        "email": "luiztesta@mail.com",
+        "password": ""
+    },
+    "wrongEmail": {
+        "email": "wrongemailtest",
+        "password": "1234@Test"
+    },
+    "wrongPassword": {
+        "email": "luiztesta@mail.com",
+        "password": "wrongpassword"
+    }
+}
