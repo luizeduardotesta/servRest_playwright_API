@@ -1,0 +1,41 @@
+{
+    "success": {
+        "nome": "Mouse HP Gaming mouse m22033",
+        "preco": 100,
+        "descricao": "Mouse",
+        "quantidade": 70
+    },
+    "headers": {
+        "Accept": "application/json"
+    },
+    "duplicate": {
+        "nome": "Mouse HP Gaming mouse m230",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": 50
+    },
+    "nomeRequired": {
+        "nome": "",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": 50
+    },
+    "precoRequired": {
+        "nome": "",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": 50
+    },
+    "descricaoRequired": {
+        "nome": "",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": 50
+    },
+    "quantidadeRequired": {
+        "nome": "",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": 50
+    }
+}

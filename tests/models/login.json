@@ -1,6 +1,6 @@
 {
     "success": {
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1231@mail.com",
         "password": "1234@Test"
     },
     "headers": {
@@ -11,7 +11,7 @@
         "password": "1234@Test"
     },
     "passwordRequired": {
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1@mail.com",
         "password": ""
     },
     "wrongEmail": {
@@ -19,7 +19,7 @@
         "password": "1234@Test"
     },
     "wrongPassword": {
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1@mail.com",
         "password": "wrongpassword"
     }
 }

@@ -1,7 +1,7 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1231@mail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -16,7 +16,7 @@
     },
     "nomeRequired": {
         "nome": "",
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1@mail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -28,7 +28,7 @@
     },
     "passwordRequired": {
         "nome": "Luiz Testa",
-        "email": "luiztesta@mail.com",
+        "email": "luiztesta1@mail.com",
         "password": "",
         "administrador": "true"
     },

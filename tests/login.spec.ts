@@ -20,7 +20,7 @@ test.describe('Login', () => {
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(200);
-        
+
         const loginResponseBody = await loginResponse.json();
 
         expect(loginResponseBody.message).toEqual('Login realizado com sucesso');
@@ -37,7 +37,7 @@ test.describe('Login', () => {
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(400);
-        
+
         const loginResponseBody = await loginResponse.json();
 
         expect(loginResponseBody.email).toEqual('email não pode ficar em branco');
@@ -49,7 +49,7 @@ test.describe('Login', () => {
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(400);
-        
+
         const loginResponseBody = await loginResponse.json();
 
         expect(loginResponseBody.password).toEqual('password não pode ficar em branco');
@@ -61,20 +61,20 @@ test.describe('Login', () => {
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(400);
-        
+
         const loginResponseBody = await loginResponse.json();
         console.log(await loginResponseBody)
 
         expect(loginResponseBody.email).toEqual('email deve ser um email válido');
     })
 
-    test.only('Realizar login com a senha errada', async ({ request }) => {
+    test('Realizar login com a senha errada', async ({ request }) => {
         const loginData = JSON.parse(readFileSync('tests/models/login.json', 'utf-8'));
         const userLogin: LoginModel = loginData.wrongPassword;
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(401);
-        
+
         const loginResponseBody = await loginResponse.json();
 
         expect(loginResponseBody.message).toEqual('Email e/ou senha inválidos');

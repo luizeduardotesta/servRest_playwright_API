@@ -15,3 +15,11 @@ export interface LoginModel {
     password: string
     headers: HeadersModel;
 }
+
+export interface ProductModel {
+    nome: string,
+    preco: number,
+    descricao: string,
+    quantidade: number
+    headers: HeadersModel;
+}

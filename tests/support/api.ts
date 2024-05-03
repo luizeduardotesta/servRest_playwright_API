@@ -1,5 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
-import { LoginModel, UserModel } from '../models/commonModels';
+import { LoginModel, ProductModel, UserModel } from '../models/commonModels';
 
 require('dotenv').config();
 
@@ -32,6 +32,25 @@ export async function updateUser(request: APIRequestContext, user: UserModel, us
 export async function login(request: APIRequestContext, userLogin: LoginModel) {
     const response = await request.post(`${BASE_URL}/login`, {
         data: userLogin
+    });
+    return response
+};
+
+export async function createProduct(request: APIRequestContext, product: ProductModel, token: string) {
+    const response = await request.post(`${BASE_URL}/produtos`, {
+        data: product,
+        headers: {
+            authorization: `${token}`
+        }
+    });
+    return response
+};
+
+export async function deleteProduct(request: APIRequestContext, productId: string, token: string) {
+    const response = await request.delete(`${BASE_URL}/produtos/${productId}`, {
+        headers: {
+            authorization: `${token}`
+        }
     });
     return response
 };
