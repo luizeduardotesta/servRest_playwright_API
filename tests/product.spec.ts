@@ -1,32 +1,24 @@
 import { test, expect } from '@playwright/test';
-import { createProduct, createUser, deleteProduct, deleteUser, getProduct, login } from './support/api';
+import { createProduct, createUser, deleteProduct, deleteUser, getProduct, login, updateProduct } from './support/api';
 import { readFileSync } from 'fs';
 import { LoginModel, ProductModel, UserModel } from './models/commonModels';
+import { createUserAndLogin, token, userId } from './support/testUtils';
 
-export let userId: string;
-export let token: string;
 export let productId: string;
 
+const userDataPath = 'tests/models/user.json';
+const loginDataPath = 'tests/models/login.json';
+const productDataPath = 'tests/models/product.json';
+
 test.describe('Criar produto', () =>{
-    test.only('Cadastrar produto com sucesso', async ({request}) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.successProduct;
-        const loginData = JSON.parse(readFileSync('tests/models/login.json', 'utf-8'));
-        const userLogin: LoginModel = loginData.successProduct;
-        const productData = JSON.parse(readFileSync('tests/models/product.json', 'utf-8'));
-        const product: ProductModel = productData.success;
+    test('Cadastrar produto com sucesso', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successProduct;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successProduct;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).success;
 
-        const createUserResponse = await createUser(request, user);
-        expect(createUserResponse.status()).toEqual(201);
-        const createUserResponseBody = await createUserResponse.json();
-        userId = createUserResponseBody._id;
+        await createUserAndLogin(request, createUser, login, userData, loginData);
 
-        const loginResponse = await login(request, userLogin);
-        expect(loginResponse.status()).toEqual(200);
-        const loginResponseBody = await loginResponse.json();
-        token = loginResponseBody.authorization;
-
-        const createProductResponse = await createProduct(request, product, token);
+        const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
         
         const createProductResponseBody = await createProductResponse.json();
@@ -39,7 +31,7 @@ test.describe('Criar produto', () =>{
         expect(getProductResponse.status()).toEqual(200);
 
         const getProductResponseBody = await getProductResponse.json();
-        const expectedProductData = { ...productData.success, _id: productId };
+        const expectedProductData = { ...productData, _id: productId };
         expect(getProductResponseBody).toEqual(expectedProductData)
 
         const deleteProductResponse = await deleteProduct(request, productId, token)
@@ -48,6 +40,42 @@ test.describe('Criar produto', () =>{
         const deleteProductResponseBody = await deleteProductResponse.json();
 
         expect(deleteProductResponseBody.message).toEqual('Registro excluído com sucesso');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+});
+
+test.describe('Atualizar produto', () => {
+    test('Atualizar produto com sucesso', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successProduct;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successProduct;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).preUpdate;
+        const updatedproductData = JSON.parse(readFileSync(productDataPath, 'utf-8')).update;
+
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(201);
+        const createProductResponseBody = await createProductResponse.json();
+        productId = createProductResponseBody._id;
+
+        const getProductResponse = await getProduct(request, productId);
+        expect(getProductResponse.status()).toEqual(200);
+        const getProductResponseBody = await getProductResponse.json();
+        const expectedProductData = { ...productData, _id: productId };
+        expect(getProductResponseBody).toEqual(expectedProductData)
+
+        const updatedProductResponse = await updateProduct(request, updatedproductData, token, productId);
+        expect(updatedProductResponse.status()).toEqual(200);
+
+        const updatedProductResponseBody = await updatedProductResponse.json();
+
+        expect(updatedProductResponseBody.message).toEqual('Registro alterado com sucesso');
+        expect(updatedProductResponseBody).not.toEqual(getProductResponseBody)
+
+        const deleteProductResponse = await deleteProduct(request, productId, token)
+        expect(deleteProductResponse.status()).toEqual(200);
 
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);

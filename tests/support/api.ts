@@ -59,3 +59,13 @@ export async function getProduct(request: APIRequestContext, productId: string) 
     const response = await request.get(`${BASE_URL}/produtos/${productId}`);
     return response;
 };
+
+export async function updateProduct(request: APIRequestContext, product: ProductModel, token: string, productId: string) {
+    const response = await request.put(`${BASE_URL}/produtos/${productId}`, {
+        data: product,
+        headers: {
+            authorization: `${token}`
+        }
+    });
+    return response
+};

@@ -1,6 +1,6 @@
 {
     "success": {
-        "nome": "Mouse HP Gaming mouse m280",
+        "nome": "Mouse HP Gaming mouse m285",
         "preco": 100,
         "descricao": "Mouse",
         "quantidade": 70
@@ -21,21 +21,33 @@
         "quantidade": 50
     },
     "precoRequired": {
-        "nome": "",
-        "preco": 110,
+        "nome": "Mouse HP Gaming mouse m280",
+        "preco": "",
         "descricao": "Mouse",
         "quantidade": 50
     },
     "descricaoRequired": {
-        "nome": "",
+        "nome": "Mouse HP Gaming mouse m280",
         "preco": 110,
-        "descricao": "Mouse",
+        "descricao": "",
         "quantidade": 50
     },
     "quantidadeRequired": {
-        "nome": "",
+        "nome": "Mouse HP Gaming mouse m280",
         "preco": 110,
         "descricao": "Mouse",
+        "quantidade": ""
+    },
+    "preUpdate": {
+        "nome": "Memoria ram 8gb",
+        "preco": 500,
+        "descricao": "Memoria",
         "quantidade": 50
+    },
+    "update": {
+        "nome": "Memoria ram 16gb",
+        "preco": 850,
+        "descricao": "Memoria",
+        "quantidade": 60
     }
 }
