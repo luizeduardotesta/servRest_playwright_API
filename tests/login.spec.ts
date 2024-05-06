@@ -9,7 +9,7 @@ export let token: string;
 test.describe('Login', () => {
     test('Realizar login com sussesso', async ({ request }) => {
         const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.success;
+        const user: UserModel = userData.successLogin;
         const loginData = JSON.parse(readFileSync('tests/models/login.json', 'utf-8'));
         const userLogin: LoginModel = loginData.success;
 
@@ -55,17 +55,28 @@ test.describe('Login', () => {
         expect(loginResponseBody.password).toEqual('password não pode ficar em branco');
     })
 
-    test('Realizar login com o email errado', async ({ request }) => {
+    test('Realizar login com o email com formato invalido', async ({ request }) => {
         const loginData = JSON.parse(readFileSync('tests/models/login.json', 'utf-8'));
-        const userLogin: LoginModel = loginData.wrongEmail;
+        const userLogin: LoginModel = loginData.invalidEmail;
 
         const loginResponse = await login(request, userLogin);
         expect(loginResponse.status()).toEqual(400);
 
         const loginResponseBody = await loginResponse.json();
-        console.log(await loginResponseBody)
 
         expect(loginResponseBody.email).toEqual('email deve ser um email válido');
+    })
+
+    test('Realizar login com o email errado', async ({ request }) => {
+        const loginData = JSON.parse(readFileSync('tests/models/login.json', 'utf-8'));
+        const userLogin: LoginModel = loginData.wrongEmail;
+
+        const loginResponse = await login(request, userLogin);
+        expect(loginResponse.status()).toEqual(401);
+
+        const loginResponseBody = await loginResponse.json();
+
+        expect(loginResponseBody.message).toEqual('Email e/ou senha inválidos');
     })
 
     test('Realizar login com a senha errada', async ({ request }) => {

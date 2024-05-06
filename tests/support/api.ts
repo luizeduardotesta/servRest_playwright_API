@@ -54,3 +54,8 @@ export async function deleteProduct(request: APIRequestContext, productId: strin
     });
     return response
 };
+
+export async function getProduct(request: APIRequestContext, productId: string) {
+    const response = await request.get(`${BASE_URL}/produtos/${productId}`);
+    return response;
+};

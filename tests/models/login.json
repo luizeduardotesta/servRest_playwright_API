@@ -1,25 +1,33 @@
 {
     "success": {
-        "email": "luiztesta1231@mail.com",
+        "email": "luiztesta2001@hotmail.com",
         "password": "1234@Test"
     },
     "headers": {
         "Accept": "application/json"
+    },
+    "successProduct": {
+        "email": "luiztesta2022@hotmail.com",
+        "password": "1234@Test"
     },
     "emailRequired": {
         "email": "",
         "password": "1234@Test"
     },
     "passwordRequired": {
-        "email": "luiztesta1@mail.com",
+        "email": "luiztesta182@hotmail.com",
         "password": ""
     },
-    "wrongEmail": {
+    "invalidEmail": {
         "email": "wrongemailtest",
         "password": "1234@Test"
     },
+    "wrongEmail": {
+        "email": "wrongemailtest@gmail.com",
+        "password": "1234@Test"
+    },
     "wrongPassword": {
-        "email": "luiztesta1@mail.com",
+        "email": "luiztesta182@hotmail.com",
         "password": "wrongpassword"
     }
 }

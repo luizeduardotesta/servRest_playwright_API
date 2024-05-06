@@ -1,7 +1,19 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztesta1231@mail.com",
+        "email": "luiztesta2084@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "successLogin": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta2001@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "successProduct": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta2022@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -16,7 +28,7 @@
     },
     "nomeRequired": {
         "nome": "",
-        "email": "luiztesta1@mail.com",
+        "email": "luiztest182@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -28,7 +40,7 @@
     },
     "passwordRequired": {
         "nome": "Luiz Testa",
-        "email": "luiztesta1@mail.com",
+        "email": "luiztest182@hotmail.com",
         "password": "",
         "administrador": "true"
     },
