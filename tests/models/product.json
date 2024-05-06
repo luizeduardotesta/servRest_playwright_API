@@ -39,13 +39,13 @@
         "quantidade": ""
     },
     "preUpdate": {
-        "nome": "Memoria ram 8gb",
+        "nome": "Memoria ram 8gbs",
         "preco": 500,
         "descricao": "Memoria",
         "quantidade": 50
     },
     "update": {
-        "nome": "Memoria ram 16gb",
+        "nome": "Memoria ram 16gbs",
         "preco": 850,
         "descricao": "Memoria",
         "quantidade": 60
