@@ -13,7 +13,13 @@
     },
     "successProduct": {
         "nome": "Luiz Testa",
-        "email": "luiztesta2026@hotmail.com",
+        "email": "luiztesta2027@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "successUpdatedProduct": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta2030@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },

@@ -1,7 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { createProduct, createUser, deleteProduct, deleteUser, getProduct, login, updateProduct } from './support/api';
 import { readFileSync } from 'fs';
-import { LoginModel, ProductModel, UserModel } from './models/commonModels';
 import { createUserAndLogin, token, userId } from './support/testUtils';
 
 export let productId: string;
@@ -48,8 +47,8 @@ test.describe('Criar produto', () =>{
 
 test.describe('Atualizar produto', () => {
     test('Atualizar produto com sucesso', async ({request}) => {
-        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successProduct;
-        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successProduct;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successUpdatedProduct;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successUpdatedProduct;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).preUpdate;
         const updatedproductData = JSON.parse(readFileSync(productDataPath, 'utf-8')).update;
 

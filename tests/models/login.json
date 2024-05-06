@@ -7,7 +7,11 @@
         "Accept": "application/json"
     },
     "successProduct": {
-        "email": "luiztesta2026@hotmail.com",
+        "email": "luiztesta2027@hotmail.com",
+        "password": "1234@Test"
+    },
+    "successUpdatedProduct": {
+        "email": "luiztesta2027@hotmail.com",
         "password": "1234@Test"
     },
     "emailRequired": {
