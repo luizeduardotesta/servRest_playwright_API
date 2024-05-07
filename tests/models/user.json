@@ -1,7 +1,7 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztesta2084@hotmail.com",
+        "email": "luiztesta2085@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -29,6 +29,12 @@
     "duplicate": {
         "nome": "Luiz Eduardo Testa",
         "email": "luizeduardotesta@mail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "duplicateProduct": {
+        "nome": "Luiz Eduardo Testa",
+        "email": "luizeduardotesta2125@mail.com",
         "password": "1234@Test",
         "administrador": "true"
     },

@@ -10,6 +10,10 @@
         "email": "luiztesta2027@hotmail.com",
         "password": "1234@Test"
     },
+    "duplicateProduct": {
+        "email": "luizeduardotesta2125@mail.com",
+        "password": "1234@Test"
+    },
     "successUpdatedProduct": {
         "email": "luiztesta2032@hotmail.com",
         "password": "1234@Test"

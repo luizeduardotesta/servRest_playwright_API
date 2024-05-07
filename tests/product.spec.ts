@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { createProduct, createUser, deleteProduct, deleteUser, getProduct, login, updateProduct } from './support/api';
 import { readFileSync } from 'fs';
-import { createUserAndLogin, token, userId } from './support/testUtils';
+import { createUserAndLogin, token, userId, verifyProductCreation } from './support/testUtils';
 
 export let productId: string;
 
@@ -39,6 +39,33 @@ test.describe('Criar produto', () =>{
         const deleteProductResponseBody = await deleteProductResponse.json();
 
         expect(deleteProductResponseBody.message).toEqual('Registro excluído com sucesso');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto com nome duplicado', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).duplicateProduct;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).duplicateProduct;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).duplicate;
+
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+        
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(201);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        productId = createProductResponseBody._id;
+
+        const duplicateProductResponse = await createProduct(request, productData, token);
+        expect(duplicateProductResponse.status()).toEqual(400);
+        
+        const duplicateProductResponseBody = await duplicateProductResponse.json();
+
+        expect(duplicateProductResponseBody.message).toEqual('Já existe produto com esse nome');
+
+        const deleteProductResponse = await deleteProduct(request, productId, token)
+        expect(deleteProductResponse.status()).toEqual(200);
 
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);

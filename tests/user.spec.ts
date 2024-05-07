@@ -5,12 +5,13 @@ import { UserModel } from './models/commonModels';
 
 export let userId: string;
 
+const userDataPath = 'tests/models/user.json';
+
 test.describe('Criar', () => {
     test('Criar um usuário com sussesso', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.success;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).success;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(201);
 
         const postResponseBody = await postResponse.json();
@@ -22,7 +23,7 @@ test.describe('Criar', () => {
         const getResponse = await listUserByID(request, userId);
         expect(getResponse.status()).toEqual(200);
         const getResponseBody = await getResponse.json();
-        const expectedUserData = { ...userData.success, _id: userId };
+        const expectedUserData = { ...userData, _id: userId };
         expect(getResponseBody).toEqual(expectedUserData)
 
         const deleteResponse = await deleteUser(request, userId);
@@ -37,15 +38,14 @@ test.describe('Criar', () => {
     });
 
     test('Criar um usuário com email repetido', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.duplicate;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).duplicate;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(201);
         const postResponseBody = await postResponse.json();
         userId = postResponseBody._id;
 
-        const duplicateResponse = await createUser(request, user);
+        const duplicateResponse = await createUser(request, userData);
         expect(duplicateResponse.status()).toEqual(400);
 
         const duplicateResponseBody = await duplicateResponse.json();
@@ -57,10 +57,9 @@ test.describe('Criar', () => {
     });
 
     test('Criar um usuário com o nome em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.nomeRequired;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).nomeRequired;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(400);
 
         const postResponseBody = await postResponse.json();
@@ -69,10 +68,9 @@ test.describe('Criar', () => {
     })
 
     test('Criar um usuário com o email em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.emailRequired;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).emailRequired;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(400);
 
         const postResponseBody = await postResponse.json();
@@ -81,10 +79,9 @@ test.describe('Criar', () => {
     })
 
     test('Criar um usuário com a senha em branco', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.passwordRequired;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).passwordRequired;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(400);
 
         const postResponseBody = await postResponse.json();
@@ -95,11 +92,10 @@ test.describe('Criar', () => {
 
 test.describe('Atualizar', () => {
     test('Editar um usuário com sussesso', async ({ request }) => {
-        const userData = JSON.parse(readFileSync('tests/models/user.json', 'utf-8'));
-        const user: UserModel = userData.preUpdate;
-        const updatedUser: UserModel = userData.update;
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).preUpdate;
+        const userUpdatedData = JSON.parse(readFileSync(userDataPath, 'utf-8')).update;
 
-        const postResponse = await createUser(request, user);
+        const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(201);
         const postResponseBody = await postResponse.json();
         userId = postResponseBody._id;
@@ -107,10 +103,10 @@ test.describe('Atualizar', () => {
         const getResponse = await listUserByID(request, userId);
         expect(getResponse.status()).toEqual(200);
         const getResponseBody = await getResponse.json();
-        const expectedUserData = { ...userData.preUpdate, _id: userId };
+        const expectedUserData = { ...userData, _id: userId };
         expect(getResponseBody).toEqual(expectedUserData)
 
-        const putResponse = await updateUser(request, updatedUser, userId);
+        const putResponse = await updateUser(request, userUpdatedData, userId);
         expect(putResponse.status()).toEqual(200);
 
         const putResponseBody = await putResponse.json();

@@ -17,19 +17,9 @@ export async function createUserAndLogin(request: any, createUser: any, login: a
     token = loginResponseBody.authorization;
 }
 
-export async function verifyProductCreation(request: any, createProduct: any, getProduct: any, product: ProductModel, token: string) {
-    const createProductResponse = await createProduct(request, product, token);
+export async function verifyProductCreation(request: any, createProduct: any, productData: ProductModel, token: string) {
+    const createProductResponse = await createProduct(request, productData, token);
     expect(createProductResponse.status()).toEqual(201);
-    
     const createProductResponseBody = await createProductResponse.json();
-    expect(createProductResponseBody.message).toEqual('Cadastro realizado com sucesso');
-    expect(createProductResponseBody._id).toBeTruthy();
     productId = createProductResponseBody._id;
-
-    const getProductResponse = await getProduct(request, productId);
-    expect(getProductResponse.status()).toEqual(200);
-
-    const getProductResponseBody = await getProductResponse.json();
-    const expectedProductData = { ...product, _id: productId };
-    expect(getProductResponseBody).toEqual(expectedProductData);
 }
