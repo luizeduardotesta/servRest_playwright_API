@@ -67,5 +67,17 @@
         "email": "luizetsantos@mail.com",
         "password": "1234@Teste",
         "administrador": "true"
+    },
+    "userNotAdmin": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta3002@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "false"
+    },
+    "userNoToken": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta4005@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "false"
     }
 }

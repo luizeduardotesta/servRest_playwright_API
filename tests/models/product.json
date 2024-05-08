@@ -49,5 +49,17 @@
         "preco": 850,
         "descricao": "Memoria",
         "quantidade": 60
+    },
+    "productNotAdmin": {
+        "nome": "Monitor HP Gaming m372",
+        "preco": 999,
+        "descricao": "Monitor",
+        "quantidade": 50
+    },
+    "productNoToken": {
+        "nome": "Monitor AOC Gaming m380",
+        "preco": 999,
+        "descricao": "Monitor",
+        "quantidade": 50
     }
 }

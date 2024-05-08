@@ -37,5 +37,13 @@
     "wrongPassword": {
         "email": "luiztesta182@hotmail.com",
         "password": "wrongpassword"
+    },
+    "loginNotAdmin": {
+        "email": "luiztesta3002@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginNoToken": {
+        "email": "luiztesta4005@hotmail.com",
+        "password": "1234@Test"
     }
 }

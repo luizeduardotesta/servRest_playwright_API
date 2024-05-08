@@ -70,6 +70,45 @@ test.describe('Criar produto', () =>{
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
     });
+
+    test.only('cadastrar um produto com token invalido', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoToken;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoToken;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNoToken;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+        
+        const token = '';
+        
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(401);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.message).toEqual(
+            'Token de acesso ausente, inválido, expirado ou usuário do token não existe mais'
+        );
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto com usuario sem acesso de admin', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNotAdmin;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNotAdmin;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNotAdmin;
+
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+        
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(403);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.message).toEqual('Rota exclusiva para administradores');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
 });
 
 test.describe('Atualizar produto', () => {
