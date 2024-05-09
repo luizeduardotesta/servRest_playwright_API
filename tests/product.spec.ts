@@ -71,7 +71,7 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test.only('cadastrar um produto com token invalido', async ({request}) => {
+    test('cadastrar um produto com token invalido', async ({request}) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoToken;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoToken;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNoToken;
@@ -105,6 +105,24 @@ test.describe('Criar produto', () =>{
         
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.message).toEqual('Rota exclusiva para administradores');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto sem nome', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoName;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoName;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).nomeRequired;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.nome).toEqual('nome não pode ficar em branco');
 
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);

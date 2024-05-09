@@ -45,5 +45,9 @@
     "loginNoToken": {
         "email": "luiztesta4005@hotmail.com",
         "password": "1234@Test"
+    },
+    "loginNoName": {
+        "email": "luiztesta4017@hotmail.com",
+        "password": "1234@Test"
     }
 }
