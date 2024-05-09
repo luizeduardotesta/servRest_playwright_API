@@ -85,5 +85,17 @@
         "email": "luiztesta4017@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
+    },
+    "userNoPrice": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta4027@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "userNegativePrice": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta4037@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
     }
 }

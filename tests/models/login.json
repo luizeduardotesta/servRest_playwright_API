@@ -49,5 +49,13 @@
     "loginNoName": {
         "email": "luiztesta4017@hotmail.com",
         "password": "1234@Test"
+    },
+    "loginNoPrice": {
+        "email": "luiztesta4027@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginNegativePrice": {
+        "email": "luiztesta4037@hotmail.com",
+        "password": "1234@Test"
     }
 }

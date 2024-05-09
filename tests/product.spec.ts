@@ -127,6 +127,42 @@ test.describe('Criar produto', () =>{
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
     });
+
+    test('cadastrar um produto sem preco', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoPrice;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoPrice;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).precoRequired;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.preco).toEqual('preco deve ser um número');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test.only('cadastrar um produto com preco negativo', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNegativePrice;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNegativePrice;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).precoNegative;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.preco).toEqual('preco deve ser um número positivo');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
 });
 
 test.describe('Atualizar produto', () => {

@@ -26,6 +26,12 @@
         "descricao": "Mouse",
         "quantidade": 50
     },
+    "precoNegative": {
+        "nome": "Mouse HP Gaming mouse m280",
+        "preco": 0,
+        "descricao": "Mouse",
+        "quantidade": 50
+    },
     "descricaoRequired": {
         "nome": "Mouse HP Gaming mouse m280",
         "preco": 110,
