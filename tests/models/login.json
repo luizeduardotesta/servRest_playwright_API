@@ -57,5 +57,17 @@
     "loginNegativePrice": {
         "email": "luiztesta4037@hotmail.com",
         "password": "1234@Test"
+    },
+    "loginNoDescription": {
+        "email": "luiztesta4047@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginNoQuant": {
+        "email": "luiztesta4057@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginNegativeQuant": {
+        "email": "luiztesta4067@hotmail.com",
+        "password": "1234@Test"
     }
 }

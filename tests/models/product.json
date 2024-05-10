@@ -44,6 +44,12 @@
         "descricao": "Mouse",
         "quantidade": ""
     },
+    "quantidadeNegative": {
+        "nome": "Mouse HP Gaming mouse m280",
+        "preco": 110,
+        "descricao": "Mouse",
+        "quantidade": -1
+    },
     "preUpdate": {
         "nome": "Memoria ram 8gbs",
         "preco": 500,

@@ -146,7 +146,7 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test.only('cadastrar um produto com preco negativo', async ({request}) => {
+    test('cadastrar um produto com preco negativo', async ({request}) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNegativePrice;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNegativePrice;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).precoNegative;
@@ -159,6 +159,60 @@ test.describe('Criar produto', () =>{
         
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.preco).toEqual('preco deve ser um número positivo');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto sem descricao', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoDescription;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoDescription;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).descricaoRequired;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.descricao).toEqual('descricao não pode ficar em branco');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto sem quantidade', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoQuant;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoQuant;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).quantidadeRequired;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.quantidade).toEqual('quantidade deve ser um número');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('cadastrar um produto com quantidade negativa', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNegativeQuant;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNegativeQuant;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).quantidadeNegative;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(400);
+        
+        const createProductResponseBody = await createProductResponse.json();
+        expect(createProductResponseBody.quantidade).toEqual('quantidade deve ser maior ou igual a 0');
 
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
