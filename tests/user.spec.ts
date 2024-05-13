@@ -120,4 +120,53 @@ test.describe('Atualizar', () => {
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
     });
+
+    test('Editar um usuário com email já utilizado', async ({ request }) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNotFound;
+        const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editNotFound
+
+        let userId2: string;
+
+        const postResponse = await createUser(request, userData);
+        expect(postResponse.status()).toEqual(201);
+        const postResponseBody = await postResponse.json();
+        userId = postResponseBody._id;
+
+        const existentPostResponse = await createUser(request, existentUserData);
+        expect(existentPostResponse.status()).toEqual(201);
+        const existentPostResponseBody = await existentPostResponse.json();
+        userId2 = existentPostResponseBody._id;
+
+        const putResponse = await updateUser(request, existentUserData, userId);
+        expect(putResponse.status()).toEqual(400);
+        const putResponseBody = await putResponse.json();
+        expect(putResponseBody.message).toEqual('Este email já está sendo usado')
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+
+        const deleteResponse2 = await deleteUser(request, userId2);
+        expect(deleteResponse2.status()).toEqual(200);
+    });
+});
+
+test.describe('Listar', () => {
+    test('listar um usuário inexistente', async ({ request }) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listNotFound;
+
+        const postResponse = await createUser(request, userData);
+        expect(postResponse.status()).toEqual(201);
+        const postResponseBody = await postResponse.json();
+        userId = postResponseBody._id;
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+
+        const getResponse = await listUserByID(request, userId);
+        expect(getResponse.status()).toEqual(400);
+        const getResponseBody = await getResponse.json();
+        expect(getResponseBody.message).toEqual('Usuário não encontrado')
+
+
+    });
 });

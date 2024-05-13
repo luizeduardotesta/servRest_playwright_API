@@ -1,7 +1,7 @@
 {
     "success": {
         "nome": "Luiz Testa",
-        "email": "luiztesta2085@hotmail.com",
+        "email": "luiztesta2095@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
@@ -113,6 +113,24 @@
     "userNegativeQuant": {
         "nome": "Luiz Testa",
         "email": "luiztesta4067@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "userNotFound": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1110@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "editNotFound": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1111@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "listNotFound": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1112@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     }

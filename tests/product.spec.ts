@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import { createProduct, createUser, deleteProduct, deleteUser, getProduct, login, updateProduct } from './support/api';
 import { readFileSync } from 'fs';
-import { createUserAndLogin, token, userId, verifyProductCreation } from './support/testUtils';
+import { createUserAndLogin, token, userId } from './support/testUtils';
 
 export let productId: string;
 
