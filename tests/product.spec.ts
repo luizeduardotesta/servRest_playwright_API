@@ -53,7 +53,6 @@ test.describe('Criar produto', () =>{
         
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
-        
         const createProductResponseBody = await createProductResponse.json();
         productId = createProductResponseBody._id;
 
@@ -253,4 +252,84 @@ test.describe('Atualizar produto', () => {
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
     });
+
+    test('Atualizar produto com nome já existente', async ({request}) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).existProduct;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginExistProduct;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).createExistProduct;
+        const updatedproductData = JSON.parse(readFileSync(productDataPath, 'utf-8')).editExistProduct;
+
+        let productId2: string;
+
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(201);
+        const createProductResponseBody = await createProductResponse.json();
+        productId = createProductResponseBody._id;
+
+        const createExistProductResponse = await createProduct(request, updatedproductData, token);
+        expect(createExistProductResponse.status()).toEqual(201);
+        const createExistProductResponseBody = await createExistProductResponse.json();
+        productId2 = createExistProductResponseBody._id;
+
+        const updatedProductResponse = await updateProduct(request, updatedproductData, token, productId);
+        expect(updatedProductResponse.status()).toEqual(400);
+        const updatedProductResponseBody = await updatedProductResponse.json();
+        expect(updatedProductResponseBody.message).toEqual('Já existe produto com esse nome');
+
+        const deleteProductResponse = await deleteProduct(request, productId, token)
+        expect(deleteProductResponse.status()).toEqual(200);
+
+        const deleteExistProductResponse = await deleteProduct(request, productId2, token)
+        expect(deleteExistProductResponse.status()).toEqual(200);
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
+
+    test('Atualizar produto com token invalido', async ({request}) =>{
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listUserNoToken;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).listLoginNoToken;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).listProductNoToken;
+
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+                
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(201);
+        const createProductResponseBody = await createProductResponse.json();
+        productId = createProductResponseBody._id;
+        
+        const invalidToken = '';
+
+        const updatedProductResponse = await updateProduct(request, productData, invalidToken, productId);
+        expect(updatedProductResponse.status()).toEqual(401);
+        const updatedProductResponseBody = await updatedProductResponse.json();
+        expect(updatedProductResponseBody.message).toEqual(
+            'Token de acesso ausente, inválido, expirado ou usuário do token não existe mais'
+        );
+
+        const deleteProductResponse = await deleteProduct(request, productId, token)
+        expect(deleteProductResponse.status()).toEqual(200);
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);  
+    })
+
+    test('Atualizar produto sem acesso de admin', async ({request}) =>{
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listUserNoAdmin;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).listLoginNoAdmin;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).listtProductNoAdmin;
+        
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+
+        const updatedProductResponse = await updateProduct(request, productData, token, productId);
+        expect(updatedProductResponse.status()).toEqual(403);
+        const updatedProductResponseBody = await updatedProductResponse.json();
+        expect(updatedProductResponseBody.message).toEqual('Rota exclusiva para administradores');
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);  
+    })
 });

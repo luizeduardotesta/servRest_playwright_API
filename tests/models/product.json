@@ -73,5 +73,29 @@
         "preco": 999,
         "descricao": "Monitor",
         "quantidade": 50
+    },
+    "createExistProduct": {
+        "nome": "HD TV LG 4k+",
+        "preco": 2000,
+        "descricao": "TV",
+        "quantidade": 130
+    },
+    "editExistProduct": {
+        "nome": "HD TV Samsung 8k",
+        "preco": 5000,
+        "descricao": "TV",
+        "quantidade": 10
+    },
+    "listProductNoToken": {
+        "nome": "HD TV Samsung",
+        "preco": 5000,
+        "descricao": "TV",
+        "quantidade": 10
+    },
+    "listProductNoAdmin": {
+        "nome": "HD TV Samsung 8k jbl0001v",
+        "preco": 5000,
+        "descricao": "TV",
+        "quantidade": 10
     }
 }

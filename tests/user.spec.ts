@@ -122,8 +122,8 @@ test.describe('Atualizar', () => {
     });
 
     test('Editar um usuário com email já utilizado', async ({ request }) => {
-        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNotFound;
-        const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editNotFound
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).existUser;
+        const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editExistUser
 
         let userId2: string;
 
@@ -151,7 +151,7 @@ test.describe('Atualizar', () => {
 });
 
 test.describe('Listar', () => {
-    test('listar um usuário inexistente', async ({ request }) => {
+    test('listar um usuário que não existe', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listNotFound;
 
         const postResponse = await createUser(request, userData);

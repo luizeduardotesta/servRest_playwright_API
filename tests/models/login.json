@@ -69,5 +69,17 @@
     "loginNegativeQuant": {
         "email": "luiztesta4067@hotmail.com",
         "password": "1234@Test"
+    },
+    "loginExistProduct": {
+        "email": "luiztesta1114@hotmail.com",
+        "password": "1234@Test"
+    },
+    "listLoginNoToken": {
+        "email": "luiztesta1116@hotmail.com",
+        "password": "1234@Test"
+    },
+    "listLoginNoAdmin": {
+        "email": "luiztesta1117@hotmail.com",
+        "password": "1234@Test"
     }
 }

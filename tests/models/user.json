@@ -116,13 +116,13 @@
         "password": "1234@Test",
         "administrador": "true"
     },
-    "userNotFound": {
+    "existUser": {
         "nome": "Luiz Testa",
         "email": "luiztesta1110@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
-    "editNotFound": {
+    "editExistUser": {
         "nome": "Luiz Testa",
         "email": "luiztesta1111@hotmail.com",
         "password": "1234@Test",
@@ -133,5 +133,23 @@
         "email": "luiztesta1112@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
+    },
+    "existProduct": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1114@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "listUserNoToken": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1116@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "listUserNoAdmin": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1117@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "false"
     }
 }
