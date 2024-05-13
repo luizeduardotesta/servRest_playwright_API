@@ -140,16 +140,22 @@
         "password": "1234@Test",
         "administrador": "true"
     },
-    "listUserNoToken": {
+    "editUserNoToken": {
         "nome": "Luiz Testa",
         "email": "luiztesta1116@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },
-    "listUserNoAdmin": {
+    "editUserNoAdmin": {
         "nome": "Luiz Testa",
         "email": "luiztesta1117@hotmail.com",
         "password": "1234@Test",
         "administrador": "false"
+    },
+    "userProductNotFound": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1120@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
     }
 }

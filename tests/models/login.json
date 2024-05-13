@@ -74,12 +74,16 @@
         "email": "luiztesta1114@hotmail.com",
         "password": "1234@Test"
     },
-    "listLoginNoToken": {
+    "editLoginNoToken": {
         "email": "luiztesta1116@hotmail.com",
         "password": "1234@Test"
     },
-    "listLoginNoAdmin": {
+    "editLoginNoAdmin": {
         "email": "luiztesta1117@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginProductNotFound": {
+        "email": "luiztesta1120@hotmail.com",
         "password": "1234@Test"
     }
 }

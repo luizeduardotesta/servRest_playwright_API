@@ -9,8 +9,8 @@ const userDataPath = 'tests/models/user.json';
 const loginDataPath = 'tests/models/login.json';
 const productDataPath = 'tests/models/product.json';
 
-test.describe('Criar produto', () =>{
-    test('Cadastrar produto com sucesso', async ({request}) => {
+test.describe('Criar produto', () => {
+    test('Cadastrar produto com sucesso', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successProduct;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successProduct;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).success;
@@ -19,7 +19,7 @@ test.describe('Criar produto', () =>{
 
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
-        
+
         const createProductResponseBody = await createProductResponse.json();
 
         expect(createProductResponseBody.message).toEqual('Cadastro realizado com sucesso');
@@ -44,13 +44,13 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto com nome duplicado', async ({request}) => {
+    test('cadastrar um produto com nome duplicado', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).duplicateProduct;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).duplicateProduct;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).duplicate;
 
         await createUserAndLogin(request, createUser, login, userData, loginData);
-        
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
         const createProductResponseBody = await createProductResponse.json();
@@ -58,7 +58,7 @@ test.describe('Criar produto', () =>{
 
         const duplicateProductResponse = await createProduct(request, productData, token);
         expect(duplicateProductResponse.status()).toEqual(400);
-        
+
         const duplicateProductResponseBody = await duplicateProductResponse.json();
 
         expect(duplicateProductResponseBody.message).toEqual('Já existe produto com esse nome');
@@ -70,19 +70,19 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto com token invalido', async ({request}) => {
+    test('cadastrar um produto com token invalido', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoToken;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoToken;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNoToken;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-        
+
         const token = '';
-        
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(401);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.message).toEqual(
             'Token de acesso ausente, inválido, expirado ou usuário do token não existe mais'
@@ -92,16 +92,16 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto com usuario sem acesso de admin', async ({request}) => {
+    test('cadastrar um produto com usuario sem acesso de admin', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNotAdmin;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNotAdmin;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNotAdmin;
 
         await createUserAndLogin(request, createUser, login, userData, loginData);
-        
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(403);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.message).toEqual('Rota exclusiva para administradores');
 
@@ -109,17 +109,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto sem nome', async ({request}) => {
+    test('cadastrar um produto sem nome', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoName;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoName;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).nomeRequired;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.nome).toEqual('nome não pode ficar em branco');
 
@@ -127,17 +127,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto sem preco', async ({request}) => {
+    test('cadastrar um produto sem preco', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoPrice;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoPrice;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).precoRequired;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.preco).toEqual('preco deve ser um número');
 
@@ -145,17 +145,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto com preco negativo', async ({request}) => {
+    test('cadastrar um produto com preco negativo', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNegativePrice;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNegativePrice;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).precoNegative;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.preco).toEqual('preco deve ser um número positivo');
 
@@ -163,17 +163,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto sem descricao', async ({request}) => {
+    test('cadastrar um produto sem descricao', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoDescription;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoDescription;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).descricaoRequired;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.descricao).toEqual('descricao não pode ficar em branco');
 
@@ -181,17 +181,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto sem quantidade', async ({request}) => {
+    test('cadastrar um produto sem quantidade', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNoQuant;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNoQuant;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).quantidadeRequired;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.quantidade).toEqual('quantidade deve ser um número');
 
@@ -199,17 +199,17 @@ test.describe('Criar produto', () =>{
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('cadastrar um produto com quantidade negativa', async ({request}) => {
+    test('cadastrar um produto com quantidade negativa', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userNegativeQuant;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginNegativeQuant;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).quantidadeNegative;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(400);
-        
+
         const createProductResponseBody = await createProductResponse.json();
         expect(createProductResponseBody.quantidade).toEqual('quantidade deve ser maior ou igual a 0');
 
@@ -219,7 +219,7 @@ test.describe('Criar produto', () =>{
 });
 
 test.describe('Atualizar produto', () => {
-    test('Atualizar produto com sucesso', async ({request}) => {
+    test('Atualizar produto com sucesso', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).successUpdatedProduct;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).successUpdatedProduct;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).preUpdate;
@@ -253,7 +253,7 @@ test.describe('Atualizar produto', () => {
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('Atualizar produto com nome já existente', async ({request}) => {
+    test('Atualizar produto com nome já existente', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).existProduct;
         const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginExistProduct;
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).createExistProduct;
@@ -288,19 +288,19 @@ test.describe('Atualizar produto', () => {
         expect(deleteResponse.status()).toEqual(200);
     });
 
-    test('Atualizar produto com token invalido', async ({request}) =>{
-        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listUserNoToken;
-        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).listLoginNoToken;
-        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).listProductNoToken;
+    test('Atualizar produto com token invalido', async ({ request }) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editUserNoToken;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).editLoginNoToken;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).editProductNoToken;
 
-        
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
-                
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
         const createProductResponseBody = await createProductResponse.json();
         productId = createProductResponseBody._id;
-        
+
         const invalidToken = '';
 
         const updatedProductResponse = await updateProduct(request, productData, invalidToken, productId);
@@ -310,18 +310,18 @@ test.describe('Atualizar produto', () => {
             'Token de acesso ausente, inválido, expirado ou usuário do token não existe mais'
         );
 
-        const deleteProductResponse = await deleteProduct(request, productId, token)
+        const deleteProductResponse = await deleteProduct(request, productId, token);
         expect(deleteProductResponse.status()).toEqual(200);
 
         const deleteResponse = await deleteUser(request, userId);
-        expect(deleteResponse.status()).toEqual(200);  
-    })
+        expect(deleteResponse.status()).toEqual(200);
+    });
 
-    test('Atualizar produto sem acesso de admin', async ({request}) =>{
-        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).listUserNoAdmin;
-        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).listLoginNoAdmin;
-        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).listtProductNoAdmin;
-        
+    test('Atualizar produto sem acesso de admin', async ({ request }) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editUserNoAdmin;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).editLoginNoAdmin;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).editProductNoAdmin;
+
         await createUserAndLogin(request, createUser, login, userData, loginData);
 
         const updatedProductResponse = await updateProduct(request, productData, token, productId);
@@ -330,6 +330,32 @@ test.describe('Atualizar produto', () => {
         expect(updatedProductResponseBody.message).toEqual('Rota exclusiva para administradores');
 
         const deleteResponse = await deleteUser(request, userId);
-        expect(deleteResponse.status()).toEqual(200);  
-    })
+        expect(deleteResponse.status()).toEqual(200);
+    });
+});
+
+test.describe('Listar produto', () => {
+    test('Listar produto não encontrado', async ({ request }) => {
+        const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).userProductNotFound;
+        const loginData = JSON.parse(readFileSync(loginDataPath, 'utf-8')).loginProductNotFound;
+        const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNotFound;
+
+        await createUserAndLogin(request, createUser, login, userData, loginData);
+        
+        const createProductResponse = await createProduct(request, productData, token);
+        expect(createProductResponse.status()).toEqual(201);
+        const createProductResponseBody = await createProductResponse.json();
+        productId = createProductResponseBody._id;
+
+        const deleteProductResponse = await deleteProduct(request, productId, token)
+        expect(deleteProductResponse.status()).toEqual(200);
+
+        const getProductResponse = await getProduct(request, productId);
+        expect(getProductResponse.status()).toEqual(400);
+        const getProductResponseBody = await getProductResponse.json();
+        expect(getProductResponseBody.message).toEqual('Produto não encontrado')
+
+        const deleteResponse = await deleteUser(request, userId);
+        expect(deleteResponse.status()).toEqual(200);
+    });
 });

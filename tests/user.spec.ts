@@ -123,7 +123,7 @@ test.describe('Atualizar', () => {
 
     test('Editar um usuário com email já utilizado', async ({ request }) => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).existUser;
-        const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editExistUser
+        const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editExistUser;
 
         let userId2: string;
 
@@ -165,8 +165,6 @@ test.describe('Listar', () => {
         const getResponse = await listUserByID(request, userId);
         expect(getResponse.status()).toEqual(400);
         const getResponseBody = await getResponse.json();
-        expect(getResponseBody.message).toEqual('Usuário não encontrado')
-
-
+        expect(getResponseBody.message).toEqual('Usuário não encontrado');
     });
 });
