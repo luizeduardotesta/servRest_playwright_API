@@ -7,7 +7,15 @@
         "Accept": "application/json"
     },
     "successProduct": {
-        "email": "luiztesta2027@hotmail.com",
+        "email": "luiztesta1125@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginCart": {
+        "email": "luiztesta1136@hotmail.com",
+        "password": "1234@Test"
+    },
+    "loginCart2": {
+        "email": "luiztesta1140@hotmail.com",
         "password": "1234@Test"
     },
     "duplicateProduct": {

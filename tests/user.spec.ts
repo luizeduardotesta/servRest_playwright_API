@@ -125,7 +125,7 @@ test.describe('Atualizar', () => {
         const userData = JSON.parse(readFileSync(userDataPath, 'utf-8')).existUser;
         const existentUserData = JSON.parse(readFileSync(userDataPath, 'utf-8')).editExistUser;
 
-        let userId2: string;
+        let existentUserId: string;
 
         const postResponse = await createUser(request, userData);
         expect(postResponse.status()).toEqual(201);
@@ -135,7 +135,7 @@ test.describe('Atualizar', () => {
         const existentPostResponse = await createUser(request, existentUserData);
         expect(existentPostResponse.status()).toEqual(201);
         const existentPostResponseBody = await existentPostResponse.json();
-        userId2 = existentPostResponseBody._id;
+        existentUserId = existentPostResponseBody._id;
 
         const putResponse = await updateUser(request, existentUserData, userId);
         expect(putResponse.status()).toEqual(400);
@@ -145,7 +145,7 @@ test.describe('Atualizar', () => {
         const deleteResponse = await deleteUser(request, userId);
         expect(deleteResponse.status()).toEqual(200);
 
-        const deleteResponse2 = await deleteUser(request, userId2);
+        const deleteResponse2 = await deleteUser(request, existentUserId);
         expect(deleteResponse2.status()).toEqual(200);
     });
 });

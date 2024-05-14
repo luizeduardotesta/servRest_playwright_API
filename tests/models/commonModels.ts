@@ -23,3 +23,12 @@ export interface ProductModel {
     quantidade: number
     headers: HeadersModel;
 }
+
+export interface CartModel {
+    produtos: CartProduct[];
+}
+
+export interface CartProduct {
+    idProduto: string;
+    quantidade: number;
+}

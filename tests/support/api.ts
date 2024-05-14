@@ -1,5 +1,5 @@
 import { APIRequestContext } from '@playwright/test';
-import { LoginModel, ProductModel, UserModel } from '../models/commonModels';
+import { CartModel, LoginModel, ProductModel, UserModel } from '../models/commonModels';
 
 require('dotenv').config();
 
@@ -68,4 +68,37 @@ export async function updateProduct(request: APIRequestContext, product: Product
         }
     });
     return response
+};
+
+export async function createCart(request: APIRequestContext, cart: CartModel, token: string) {
+    const response = await request.post(`${BASE_URL}/carrinhos`, {
+        data: cart,
+        headers: {
+            authorization: `${token}`
+        }
+    });
+    return response
+};
+
+export async function concludeCart(request: APIRequestContext, token: string) {
+    const response = await request.delete(`${BASE_URL}/carrinhos/concluir-compra`, {
+        headers: {
+            authorization: `${token}`
+        }
+    });
+    return response
+};
+
+export async function cancelCart(request: APIRequestContext, token: string) {
+    const response = await request.delete(`${BASE_URL}/carrinhos/cancelar-compra`, {
+        headers: {
+            authorization: `${token}`
+        }
+    });
+    return response
+};
+
+export async function getCart(request: APIRequestContext, cartId: string) {
+    const response = await request.get(`${BASE_URL}/carrinhos/${cartId}`);
+    return response;
 };

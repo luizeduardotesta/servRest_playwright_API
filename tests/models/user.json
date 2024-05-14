@@ -13,7 +13,19 @@
     },
     "successProduct": {
         "nome": "Luiz Testa",
-        "email": "luiztesta2027@hotmail.com",
+        "email": "luiztesta1125@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "successCart": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1136@hotmail.com",
+        "password": "1234@Test",
+        "administrador": "true"
+    },
+    "successCart2": {
+        "nome": "Luiz Testa",
+        "email": "luiztesta1140@hotmail.com",
         "password": "1234@Test",
         "administrador": "true"
     },

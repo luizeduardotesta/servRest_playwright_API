@@ -259,7 +259,7 @@ test.describe('Atualizar produto', () => {
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).createExistProduct;
         const updatedproductData = JSON.parse(readFileSync(productDataPath, 'utf-8')).editExistProduct;
 
-        let productId2: string;
+        let existProductId: string;
 
         await createUserAndLogin(request, createUser, login, userData, loginData);
 
@@ -271,7 +271,7 @@ test.describe('Atualizar produto', () => {
         const createExistProductResponse = await createProduct(request, updatedproductData, token);
         expect(createExistProductResponse.status()).toEqual(201);
         const createExistProductResponseBody = await createExistProductResponse.json();
-        productId2 = createExistProductResponseBody._id;
+        existProductId = createExistProductResponseBody._id;
 
         const updatedProductResponse = await updateProduct(request, updatedproductData, token, productId);
         expect(updatedProductResponse.status()).toEqual(400);
@@ -281,7 +281,7 @@ test.describe('Atualizar produto', () => {
         const deleteProductResponse = await deleteProduct(request, productId, token)
         expect(deleteProductResponse.status()).toEqual(200);
 
-        const deleteExistProductResponse = await deleteProduct(request, productId2, token)
+        const deleteExistProductResponse = await deleteProduct(request, existProductId, token)
         expect(deleteExistProductResponse.status()).toEqual(200);
 
         const deleteResponse = await deleteUser(request, userId);
@@ -341,7 +341,7 @@ test.describe('Listar produto', () => {
         const productData = JSON.parse(readFileSync(productDataPath, 'utf-8')).productNotFound;
 
         await createUserAndLogin(request, createUser, login, userData, loginData);
-        
+
         const createProductResponse = await createProduct(request, productData, token);
         expect(createProductResponse.status()).toEqual(201);
         const createProductResponseBody = await createProductResponse.json();

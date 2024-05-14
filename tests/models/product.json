@@ -5,6 +5,24 @@
         "descricao": "Mouse",
         "quantidade": 70
     },
+    "successCart": {
+        "nome": "Mouse HP Gaming mouse m011v",
+        "preco": 100,
+        "descricao": "Mouse",
+        "quantidade": 10
+    },
+    "successCart2": {
+        "nome": "Mouse HP Gaming mouse m018v",
+        "preco": 100,
+        "descricao": "Mouse",
+        "quantidade": 10
+    },
+    "secondSuccessCart": {
+        "nome": "Mouse HP Gaming mouse m019v",
+        "preco": 100,
+        "descricao": "Mouse",
+        "quantidade": 10
+    },
     "headers": {
         "Accept": "application/json"
     },
